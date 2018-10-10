@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body, html {
+      width: 100%;
+      height: 100%;
+      background-color: tomato;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>发布订阅模式</h1>
+  <button id="count">点我</button>
+  <div id="show"></div>
+  <script src="./demo.js"></script>
+  <script>
+    // 组件间通信
+    // 发布一个消息
+    var a = (function () {
+      var count = 0;
+      var btn = document.getElementById('count')
+      btn.onclick = function () {
+        salesOffices.trigger('add', count++)
+      }
+    })();
+    // 订阅了此消息的模块就能接收
+    var b = (function () {  
+      var box = document.getElementById('show')
+      salesOffices.listen('add', function (count) {  
+        box.innerHTML = count
+      })
+    })();
+  </script>
+</body>
+</html>
